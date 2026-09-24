@@ -17,14 +17,17 @@ steps:
     terraform --version
   displayName: 'Install Terraform'
 
-- script: |
-    terraform init
-  displayName: 'Terraform Init'
+- task: AzureCLI@2
+  displayName: 'Terraform Init Validate Plan'
+  inputs:
+    azureSubscription: 'cicd_pipeline'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az account show
 
-- script: |
-    terraform validate
-  displayName: 'Terraform Validate'
+      terraform init
 
-- script: |
-    terraform plan
-  displayName: 'Terraform Plan'
+      terraform validate
+
+      terraform plan
