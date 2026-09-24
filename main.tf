@@ -15,6 +15,7 @@ module "network" {
   qa_subnet_name   = var.qa_subnet_name
   prod_subnet_name = var.prod_subnet_name
 }
+
 module "dev_vm" {
   source = "./modules/vm"
 
@@ -24,7 +25,7 @@ module "dev_vm" {
   subnet_id                 = module.network.dev_subnet_id
   vm_size                   = var.vm_size
   admin_username            = var.admin_username
-  ssh_public_key            = file(pathexpand("~/.ssh/azure-devops-lab.pub"))
+  ssh_public_key            = file("${path.root}/azure-devops-lab.pub")
   network_security_group_id = module.dev_nsg.nsg_id
 }
 
@@ -37,7 +38,7 @@ module "qa_vm" {
   subnet_id                 = module.network.qa_subnet_id
   vm_size                   = var.vm_size
   admin_username            = var.admin_username
-  ssh_public_key            = file(pathexpand("~/.ssh/azure-devops-lab.pub"))
+  ssh_public_key            = file("${path.root}/azure-devops-lab.pub")
   network_security_group_id = module.qa_nsg.nsg_id
 }
 
@@ -50,9 +51,10 @@ module "prod_vm" {
   subnet_id                 = module.network.prod_subnet_id
   vm_size                   = var.vm_size
   admin_username            = var.admin_username
-  ssh_public_key            = file(pathexpand("~/.ssh/azure-devops-lab.pub"))
+  ssh_public_key            = file("${path.root}/azure-devops-lab.pub")
   network_security_group_id = module.prod_nsg.nsg_id
 }
+
 module "dev_nsg" {
   source = "./modules/nsg"
 
