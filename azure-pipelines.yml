@@ -44,4 +44,4 @@ steps:
       terraform validate
 
       echo "Terraform Plan:"
-      terraform plan
+      terraform plan -var="subscription_id=$(az account show --query id -o tsv)"
