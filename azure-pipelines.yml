@@ -37,6 +37,9 @@ steps:
       echo "Terraform Init:"
       terraform init
 
+      echo "Removing stale Terraform state lock:"
+      terraform force-unlock -force 809c53a7-ae71-3494-6a4d-f3fb3df5a069
+
       echo "Terraform Validate:"
       terraform validate
 
