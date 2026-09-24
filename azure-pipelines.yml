@@ -1,5 +1,4 @@
-trigger:
-- main
+trigger: none
 
 pool:
   vmImage: ubuntu-latest
@@ -38,7 +37,7 @@ steps:
       terraform init
 
       echo "Removing stale Terraform state lock:"
-      terraform force-unlock -force 809c53a7-ae71-3494-6a4d-f3fb3df5a069
+      terraform force-unlock -force d884f118-0fd1-175f-f172-f0fb00c08f3e
 
       echo "Terraform Validate:"
       terraform validate
