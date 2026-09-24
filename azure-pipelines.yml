@@ -11,11 +11,14 @@ steps:
     sudo apt-get install -y wget unzip
 
     wget -q https://releases.hashicorp.com/terraform/1.13.3/terraform_1.13.3_linux_amd64.zip
+
     unzip -o terraform_1.13.3_linux_amd64.zip
+
     sudo mv terraform /usr/local/bin/
 
     terraform --version
   displayName: 'Install Terraform'
+
 
 - task: AzureCLI@2
   displayName: 'Terraform Init Validate Plan'
@@ -24,10 +27,18 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
+
+      echo "Azure account:"
       az account show
 
+      echo "Terraform version:"
+      terraform --version
+
+      echo "Terraform Init:"
       terraform init
 
+      echo "Terraform Validate:"
       terraform validate
 
+      echo "Terraform Plan:"
       terraform plan
